@@ -13,7 +13,7 @@ async function bootstrap() {
     defaultVersion: '1',
   });
   app.enableCors({
-    origin: [ENV.DASHBOARD_URL],
+    origin: [ENV.DASHBOARD_URL, 'http://localhost:3000'],
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'PATCH'],
     credentials: true,
   });
