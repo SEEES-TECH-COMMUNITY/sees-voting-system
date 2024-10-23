@@ -5,8 +5,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ENV } from './config/env';
 import { CandidateModule } from './candidate/candidate.module';
 import { VoteModule } from './vote/vote.module';
+import { AppController } from './app.controller';
 
 @Module({
+  controllers: [AppController],
   imports: [
     VoteModule,
     CandidateModule,
