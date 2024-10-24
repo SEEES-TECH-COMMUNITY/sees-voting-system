@@ -20,10 +20,6 @@ export class CreateCandidateDto {
   full_name: string;
 
   @IsString()
-  @IsOptional()
-  manifesto: string;
-
-  @IsString()
   image: string;
 
   @IsString()
@@ -31,4 +27,9 @@ export class CreateCandidateDto {
 
   @IsEnum(Position)
   position: Position;
+}
+
+export class CreateCandidateBulkDto {
+  @IsArray()
+  candidates: Array<CreateCandidateDto>;
 }
