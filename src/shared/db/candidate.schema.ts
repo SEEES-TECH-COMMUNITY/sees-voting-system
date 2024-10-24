@@ -13,10 +13,7 @@ export class Candidate {
     enum: Position,
   })
   position: Position;
-
-  @Prop()
-  manifesto: string;
-
+  
   @Prop()
   image: string;
 
