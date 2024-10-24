@@ -36,7 +36,8 @@ export class AuthController {
     } else {
       res.status(401).json({
         success: false,
-        message: 'You are not authorized to login on this platform',
+        message:
+          'You are not authorized to login on this platform, ensure you sign In with your student email',
       });
     }
   }
