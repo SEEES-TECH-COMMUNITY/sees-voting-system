@@ -9,16 +9,6 @@ import { Request } from 'express';
 export class StudentsController {
   constructor(private service: StudentsService) {}
 
-  @Post('create')
-  createStudent(@Body() payload: CreateDto) {
-    return this.service.createStudent(payload);
-  }
-
-  @Post('create/bulk')
-  createBulkStudents(@Body() payload: CreateStudentBulkDto) {
-    return this.service.createBulkStudents(payload.students);
-  }
-
   @Get('')
   getStudents() {
     return this.service.getStudents();
@@ -26,7 +16,7 @@ export class StudentsController {
 
   @UseGuards(GoogleGuard)
   @Get('me')
- findUser(@Req() req: Request) {
+  findUser(@Req() req: Request) {
     return req.user;
   }
 }
