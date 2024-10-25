@@ -1,7 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 import { Student } from './students.schema';
 import { Candidate } from './candidate.schema';
+
 
 export type VoteDocument = HydratedDocument<Vote>;
 @Schema()
@@ -9,11 +10,13 @@ export class Vote {
   id: string;
 
   @Prop({
+    type: mongoose.Schema.ObjectId,
     required: true,
   })
   student_id: string;
 
   @Prop({
+    type: mongoose.Schema.ObjectId,
     required: true,
   })
   candidate_id: string;

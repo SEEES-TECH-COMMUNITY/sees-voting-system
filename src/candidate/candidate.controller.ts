@@ -1,6 +1,16 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  ParseBoolPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CandidateService } from './candidate.service';
-import { CreateCandidateBulkDto, CreateCandidateDto } from '../shared/dto/creat.dto';
+import {
+  CreateCandidateBulkDto,
+  CreateCandidateDto,
+} from '../shared/dto/creat.dto';
 
 @Controller('candidate')
 export class CandidateController {
@@ -19,5 +29,18 @@ export class CandidateController {
   @Get('all')
   getCandidates() {
     return this.service.getAllCandidates();
+  }
+
+  @Get('result')
+  getResults(
+    @Query(
+      'isFull',
+      new ParseBoolPipe({
+        optional: true,
+      }),
+    )
+    isFull: boolean,
+  ) {
+    return this.service.getResults(isFull);
   }
 }
