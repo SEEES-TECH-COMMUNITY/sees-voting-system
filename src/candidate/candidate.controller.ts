@@ -31,7 +31,7 @@ export class CandidateController {
     return this.service.getAllCandidates();
   }
 
-  @Get('result')
+  @Get('result-all')
   getResults(
     @Query(
       'isFull',
