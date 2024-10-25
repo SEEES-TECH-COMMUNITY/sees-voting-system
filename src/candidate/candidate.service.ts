@@ -75,13 +75,6 @@ export class CandidateService {
     const query = isFull
       ? [
           {
-            $addFields: {
-              positionRank: {
-                $indexOfArray: [positionOrder, '$position'],
-              },
-            },
-          },
-          {
             $lookup: {
               from: 'votes',
               localField: '_id',
@@ -93,6 +86,9 @@ export class CandidateService {
             $addFields: {
               voteCount: {
                 $size: '$votes',
+              },
+              positionRank: {
+                $indexOfArray: [positionOrder, '$position'],
               },
             },
           },
@@ -110,7 +106,8 @@ export class CandidateService {
               full_name: { $first: '$full_name' },
               position: { $first: '$position' },
               votes: { $push: '$votes' },
-              voteCount: { $sum: 1 },
+              voteCount: { $first: '$voteCount' },
+              positionRank: { $first: '$positionRank' },
             },
           },
           {
@@ -121,13 +118,6 @@ export class CandidateService {
           },
         ]
       : [
-          {
-            $addFields: {
-              positionRank: {
-                $indexOfArray: [positionOrder, '$position'],
-              },
-            },
-          },
           {
             $lookup: {
               from: 'votes',
@@ -140,6 +130,9 @@ export class CandidateService {
             $addFields: {
               voteCount: {
                 $size: '$votes',
+              },
+              positionRank: {
+                $indexOfArray: [positionOrder, '$position'],
               },
             },
           },
