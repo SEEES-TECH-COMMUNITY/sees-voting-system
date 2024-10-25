@@ -25,7 +25,7 @@ export class AuthService {
     if (!data) {
       return false;
     }
-    if(data.email.split('@')[1] !== 'eng.uniben.edu') {
+    if(!data.email.includes('uniben.edu')) {
       return false;
     }
     return this.singIn(data.email);
