@@ -25,9 +25,13 @@ export class AuthService {
     if (!data) {
       return false;
     }
+    if(data.email.split('@')[1] !== 'eng.uniben.edu') {
+      return false;
+    }
     return this.singIn(data.email);
   }
   async singIn(email: string) {
+
     const [first_name, last_name] = email.split('@')[0].split('.');
     const student = await this.studentModel.findOne({
       $and: [
