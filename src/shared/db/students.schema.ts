@@ -8,7 +8,7 @@ export class Student {
   id: string;
 
   @Prop()
-  full_name: string;
+  password: string;
 
   @Prop({
     unique: true,
