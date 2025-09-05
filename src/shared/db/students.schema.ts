@@ -24,6 +24,12 @@ StudentSchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
+StudentSchema.virtual('media', {
+  ref: 'FingerPrint',
+  localField: '_id',
+  foreignField: 'student_id',
+});
+
 StudentSchema.set('toJSON', {
   virtuals: true,
   versionKey: false,
