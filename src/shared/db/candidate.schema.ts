@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Position } from '../constants/positions';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 export type CandidateDocument = HydratedDocument<Candidate>;
 @Schema()
 export class Candidate {
@@ -13,7 +13,7 @@ export class Candidate {
     enum: Position,
   })
   position: Position;
-  
+
   @Prop()
   image: string;
 
