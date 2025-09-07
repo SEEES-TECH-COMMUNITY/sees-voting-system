@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 
 import { StudentsService } from './students.service';
 import { CreateDto, CreateStudentBulkDto } from 'src/shared/dto/creat.dto';
-import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { AuthGuard } from 'src/module/auth/guards/auth.guard';
 import { Request } from 'express';
 
 @Controller('students')
@@ -18,5 +18,10 @@ export class StudentsController {
   @Get('me')
   findUser(@Req() req: Request) {
     return req.user;
+  }
+
+  @Post('create')
+  async createStudent(@Body() payload: CreateDto) {
+    return await this.service.createStudent(payload);
   }
 }
