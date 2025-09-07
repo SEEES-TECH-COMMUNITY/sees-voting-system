@@ -13,13 +13,16 @@ export class AuthService {
     @InjectModel(FingerPrint.name) private fingerPrintModel: Model<FingerPrint>,
   ) {}
   async loginUser(body: LoginDto) {
+    console.log(body);
     const student = await this.studentModel
       .findOne({ mat_number: body.mat_number })
       .select('+password');
     if (!student) {
       return false;
     }
+    console.log(student);
     if (!(await argon2.verify(student.password, body.password))) {
+      console.log('wrong password');
       return false;
     }
     if (!body.finger_print) {
@@ -29,13 +32,14 @@ export class AuthService {
     const finger = await this.fingerPrintModel.findOne({
       finger_print: body.finger_print,
     });
+    console.log(finger);
     if (finger) {
-      if (finger.student_id !== student.id) {
+      if (finger.student_id.toString() !== student._id.toString()) {
         return false;
       }
     } else {
       const newFinger = new this.fingerPrintModel({
-        student_id: student.id,
+        student_id: student._id,
         finger_print: body.finger_print,
       });
       await newFinger.save();

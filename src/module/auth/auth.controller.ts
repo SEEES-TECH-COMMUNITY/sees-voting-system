@@ -19,6 +19,7 @@ export class AuthController {
   @Post('login')
   async googleAuthCallback(@Body() body: LoginDto, @Res() res: Response) {
     const student = await this.authService.loginUser(body);
+    console.log(student);
     if (student) {
       const config: CookieOptions =
         ENV.NODE_ENV === 'production'
@@ -46,6 +47,7 @@ export class AuthController {
       );
       res.cookie('seees_token', token, config).status(200).json({
         success: true,
+        student,
       });
     } else {
       res.status(401).json({
