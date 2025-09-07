@@ -7,7 +7,7 @@ export type StudentDocument = HydratedDocument<Student>;
 export class Student {
   id: string;
 
-  @Prop()
+  @Prop({ select: false })
   password: string;
 
   @Prop({

@@ -14,7 +14,7 @@ export class FingerPrint {
   student_id: string;
 
   @Prop()
-  fingerPrint: string;
+  finger_print: string;
 }
 export const FingerPrintSchema = SchemaFactory.createForClass(FingerPrint);
 
