@@ -1,15 +1,33 @@
-import { IsArray, IsEnum, IsOptional, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEnum,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+} from 'class-validator';
 import { Position } from '../constants/positions';
 
 export class CreateDto {
-  @IsString()
-  full_name: string;
+  @IsPhoneNumber('NG')
+  phone_number: string;
+
   @IsString()
   mat_number: string;
+
   @IsString()
   level: string;
 }
 
+export class LoginDto {
+  @IsString()
+  mat_number: string;
+
+  @IsString()
+  password: string;
+
+  @IsString()
+  finger_print?: string;
+}
 export class CreateStudentBulkDto {
   @IsArray()
   students: Array<CreateDto>;
