@@ -1,7 +1,7 @@
 import { Controller, Param, Post, UseGuards } from '@nestjs/common';
 import { VoteService } from './vote.service';
 import { AuthGuard } from '../auth/guards/auth.guard';
-import { User } from '../shared/decorators/user.decorator';
+import { User } from '../../shared/decorators/user.decorator';
 
 @Controller('vote')
 export class VoteController {
