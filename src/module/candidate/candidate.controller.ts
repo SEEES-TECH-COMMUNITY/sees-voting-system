@@ -10,7 +10,7 @@ import { CandidateService } from './candidate.service';
 import {
   CreateCandidateBulkDto,
   CreateCandidateDto,
-} from '../shared/dto/creat.dto';
+} from '../../shared/dto/creat.dto';
 
 @Controller('candidate')
 export class CandidateController {
