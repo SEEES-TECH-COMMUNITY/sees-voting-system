@@ -3,9 +3,9 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 export const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
-  GOOGLE_CLIENT_ID: z.string().min(1),
-  GOOGLE_CLIENT_SECRET: z.string().min(1),
+  JWT_SECRET: z.string().min(1),
   DASHBOARD_URL: z.string().min(1),
+  WHATSAPP_API_URL: z.string().min(1),
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
