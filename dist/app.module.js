@@ -18,13 +18,19 @@ const app_controller_1 = require("./app.controller");
 const config_1 = require("@nestjs/config");
 const configuration_1 = require("./config/configuration");
 const whatsapp_module_1 = require("./module/whatsapp/whatsapp.module");
+const throttler_1 = require("@nestjs/throttler");
+const core_1 = require("@nestjs/core");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         controllers: [app_controller_1.AppController],
-        imports: [whatsapp_module_1.WhatsappModule,
+        imports: [
+            whatsapp_module_1.WhatsappModule,
+            throttler_1.ThrottlerModule.forRoot({
+                throttlers: [{ limit: 100, ttl: 60 }],
+            }),
             vote_module_1.VoteModule,
             candidate_module_1.CandidateModule,
             config_1.ConfigModule.forRoot({
@@ -34,6 +40,12 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(env_1.ENV.DATABASE_URL, { dbName: 'voting-service' }),
             auth_module_1.AuthModule,
             students_module_1.StudentsModule,
+        ],
+        providers: [
+            {
+                provide: core_1.APP_GUARD,
+                useClass: throttler_1.ThrottlerGuard,
+            },
         ],
     })
 ], AppModule);

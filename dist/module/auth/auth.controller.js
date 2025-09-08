@@ -35,12 +35,12 @@ let AuthController = class AuthController {
                     httpOnly: true,
                     path: '/',
                     secure: true,
-                    sameSite: 'none',
+                    sameSite: 'lax',
+                    domain: 'seees-uniben.org',
                 }
                 : {
                     httpOnly: true,
                     path: '/',
-                    domain: 'localhost',
                     secure: false,
                     sameSite: 'lax',
                     maxAge: 3600000,
