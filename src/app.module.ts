@@ -17,7 +17,7 @@ import { APP_GUARD } from '@nestjs/core';
   imports: [
     WhatsappModule,
     ThrottlerModule.forRoot({
-      throttlers: [{ limit: 100, ttl: 60 }],
+      throttlers: [{ limit: 100, ttl: 60000 }],
     }),
     VoteModule,
     CandidateModule,

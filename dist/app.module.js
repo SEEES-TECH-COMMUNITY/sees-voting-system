@@ -29,7 +29,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             whatsapp_module_1.WhatsappModule,
             throttler_1.ThrottlerModule.forRoot({
-                throttlers: [{ limit: 100, ttl: 60 }],
+                throttlers: [{ limit: 100, ttl: 60000 }],
             }),
             vote_module_1.VoteModule,
             candidate_module_1.CandidateModule,
