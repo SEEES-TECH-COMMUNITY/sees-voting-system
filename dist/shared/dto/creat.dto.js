@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateCandidateBulkDto = exports.CreateCandidateDto = exports.CreateStudentBulkDto = exports.LoginDto = exports.CreateDto = void 0;
 const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 const positions_1 = require("../constants/positions");
 class CreateDto {
 }
@@ -54,25 +55,36 @@ class CreateCandidateDto {
 exports.CreateCandidateDto = CreateCandidateDto;
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Full name is required' }),
     __metadata("design:type", String)
 ], CreateCandidateDto.prototype, "full_name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Image URL is required' }),
     __metadata("design:type", String)
 ], CreateCandidateDto.prototype, "image", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)({ message: 'Level is required' }),
     __metadata("design:type", String)
 ], CreateCandidateDto.prototype, "level", void 0);
 __decorate([
-    (0, class_validator_1.IsEnum)(positions_1.Position),
+    (0, class_validator_1.IsEnum)(positions_1.Position, {
+        message: `Position must be one of: ${Object.values(positions_1.Position).join(', ')}`,
+    }),
     __metadata("design:type", String)
 ], CreateCandidateDto.prototype, "position", void 0);
 class CreateCandidateBulkDto {
 }
 exports.CreateCandidateBulkDto = CreateCandidateBulkDto;
 __decorate([
-    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsArray)({ message: 'Candidates must be an array' }),
+    (0, class_validator_1.ArrayNotEmpty)({ message: 'At least one candidate is required' }),
+    (0, class_validator_1.ArrayMaxSize)(100, {
+        message: 'Maximum 100 candidates can be uploaded at once',
+    }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => CreateCandidateDto),
     __metadata("design:type", Array)
 ], CreateCandidateBulkDto.prototype, "candidates", void 0);
 //# sourceMappingURL=creat.dto.js.map

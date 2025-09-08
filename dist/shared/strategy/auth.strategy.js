@@ -23,6 +23,7 @@ let AuthTokenStrategy = class AuthTokenStrategy extends (0, passport_1.PassportS
                 if (req && req.cookies) {
                     token = req.cookies['seees_token'];
                 }
+                console.log({ token });
                 return token;
             },
             secretOrKey: env_1.ENV.JWT_SECRET,

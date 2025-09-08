@@ -16,7 +16,9 @@ let Candidate = class Candidate {
 };
 exports.Candidate = Candidate;
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({
+        unique: true,
+    }),
     __metadata("design:type", String)
 ], Candidate.prototype, "full_name", void 0);
 __decorate([
@@ -26,7 +28,9 @@ __decorate([
     __metadata("design:type", String)
 ], Candidate.prototype, "position", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({
+        unique: true,
+    }),
     __metadata("design:type", String)
 ], Candidate.prototype, "image", void 0);
 __decorate([

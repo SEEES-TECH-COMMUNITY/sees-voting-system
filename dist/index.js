@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./config/validateEnv");
 const core_1 = require("@nestjs/core");
+const treblle = require('@treblle/express');
 const app_module_1 = require("./app.module");
 const common_1 = require("@nestjs/common");
 const cookieParser = require("cookie-parser");
@@ -20,6 +21,24 @@ async function bootstrap() {
         credentials: true,
     });
     app.useGlobalFilters(new forbidden_exception_filter_1.ForbiddenExceptionFilter());
+    app.useGlobalPipes(new common_1.ValidationPipe({
+        whitelist: true,
+        transform: true,
+        always: true,
+    }));
+    if (env_1.ENV.NODE_ENV !== 'development') {
+        app.use((req, res, next) => {
+            if (new RegExp('swagger').test(req.path)) {
+                return next();
+            }
+            return treblle({
+                apiKey: process.env.TREBLLE_API_KEY,
+                projectId: process.env.TREBLLE_PROJECT_ID,
+                additionalFieldsToMask: [],
+                blacklistPaths: [],
+            })(req, res, next);
+        });
+    }
     app.use(session({
         secret: 'vgz0WHhVlip359/LZmFVZZGVhXAceaJ1vRBhBxlpQ/w=',
         saveUninitialized: false,

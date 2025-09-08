@@ -15,17 +15,7 @@ export declare class CandidateService {
     } & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    createCandidateBulk(candidates: Array<CreateCandidateDto>): Promise<import("mongoose").MergeType<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Candidate> & Candidate & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    }> & import("mongoose").Document<unknown, {}, Candidate> & Candidate & {
-        _id: import("mongoose").Types.ObjectId;
-    } & {
-        __v?: number;
-    } & Required<{
-        _id: import("mongoose").Types.ObjectId;
-    }>, Omit<CreateCandidateDto, "_id">>[]>;
+    createCandidateBulk(candidates: Array<CreateCandidateDto>): Promise<any[]>;
     checkCandidateExists(full_name: string, level: string): Promise<void>;
     updateCandidate(candidate_id: string, update: CreateCandidateDto): import("mongoose").Query<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Candidate> & Candidate & {
         _id: import("mongoose").Types.ObjectId;
