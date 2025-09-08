@@ -28,15 +28,16 @@ export class AuthController {
               httpOnly: true,
               path: '/',
               secure: true,
-              sameSite: 'none',
+              sameSite: 'lax', // Changed from 'none' to 'lax' for same domain
+              domain: '.seees-uniben.org', // Set to parent domain with leading dot
             }
           : {
               httpOnly: true,
               path: '/',
-              domain: 'localhost',
               secure: false,
               sameSite: 'lax',
               maxAge: 3600000,
+              // Remove localhost domain for flexibility
             };
       const token = this.jwtService.sign(
         { identifier: student._id, fingerprint: body.finger_print },
