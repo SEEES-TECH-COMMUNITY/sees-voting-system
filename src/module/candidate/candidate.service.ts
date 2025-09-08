@@ -19,10 +19,13 @@ export class CandidateService {
     return newCandidate.save();
   }
   async createCandidateBulk(candidates: Array<CreateCandidateDto>) {
+    const createdCandidates = [];
     for (const candidate of candidates) {
       await this.checkCandidateExists(candidate.full_name, candidate.level);
+      const newCandidate = new this.candidateModel(candidate);
+      createdCandidates.push(await newCandidate.save());
     }
-    return this.candidateModel.insertMany(candidates);
+    return createdCandidates;
   }
   async checkCandidateExists(full_name: string, level: string) {
     const candidate = await this.candidateModel.findOne({
