@@ -22,6 +22,7 @@ export class AuthTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
         if (req && req.cookies) {
           token = req.cookies['seees_token'];
         }
+        console.log({ token });
         return token;
       },
       secretOrKey: ENV.JWT_SECRET,
