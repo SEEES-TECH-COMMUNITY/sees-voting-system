@@ -28,8 +28,8 @@ export class AuthController {
               httpOnly: true,
               path: '/',
               secure: true,
-              sameSite: 'lax', // Changed from 'none' to 'lax' for same domain
-              domain: '.seees-uniben.org', // Set to parent domain with leading dot
+              sameSite: 'lax',
+              domain: '.seees-uniben.org',
             }
           : {
               httpOnly: true,
