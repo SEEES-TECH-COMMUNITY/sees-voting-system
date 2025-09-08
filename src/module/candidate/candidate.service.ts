@@ -21,6 +21,7 @@ export class CandidateService {
   async createCandidateBulk(candidates: Array<CreateCandidateDto>) {
     const createdCandidates = [];
     for (const candidate of candidates) {
+      // upload in order so there is no need for custom ordering
       await this.checkCandidateExists(candidate.full_name, candidate.level);
       const newCandidate = new this.candidateModel(candidate);
       createdCandidates.push(await newCandidate.save());
