@@ -6,7 +6,9 @@ export type CandidateDocument = HydratedDocument<Candidate>;
 export class Candidate {
   id: string;
 
-  @Prop()
+  @Prop({
+    unique: true,
+  })
   full_name: string;
 
   @Prop({
@@ -14,7 +16,9 @@ export class Candidate {
   })
   position: Position;
 
-  @Prop()
+  @Prop({
+    unique: true,
+  })
   image: string;
 
   @Prop()
