@@ -9,11 +9,16 @@ import { AppController } from './app.controller';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { WhatsappModule } from './module/whatsapp/whatsapp.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   controllers: [AppController],
-  imports: [WhatsappModule,
-
+  imports: [
+    WhatsappModule,
+    ThrottlerModule.forRoot({
+      throttlers: [{ limit: 100, ttl: 60 }],
+    }),
     VoteModule,
     CandidateModule,
     ConfigModule.forRoot({
@@ -23,6 +28,12 @@ import { WhatsappModule } from './module/whatsapp/whatsapp.module';
     MongooseModule.forRoot(ENV.DATABASE_URL, { dbName: 'voting-service' }),
     AuthModule,
     StudentsModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
   ],
 })
 export class AppModule {}

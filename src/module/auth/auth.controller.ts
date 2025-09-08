@@ -29,7 +29,7 @@ export class AuthController {
               path: '/',
               secure: true,
               sameSite: 'lax',
-              domain: '.seees-uniben.org',
+              domain: 'seees-uniben.org',
             }
           : {
               httpOnly: true,
