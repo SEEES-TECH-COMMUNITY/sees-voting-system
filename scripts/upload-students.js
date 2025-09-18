@@ -1,11 +1,11 @@
 // Configuration
-const API_URL = 'http://localhost:3005/v1/students/create';
+const API_URL = 'http://localhost:3005/v1/students/bulk-create';
 
 // Student data - modify this array with your students
 const studentsData = [
   {
-    phone_number: '+2348022623069',
-    mat_number: 'ENG2002311',
+    phone_number: '+2349038009031',
+    mat_number: 'ENG20023111',
     level: '500',
   },
 ];
@@ -22,7 +22,7 @@ async function uploadStudents() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        candidates: candidatesData,
+        students: studentsData,
       }),
     });
 
@@ -41,4 +41,4 @@ async function uploadStudents() {
 }
 
 // Run the upload
-uploadCandidates();
+uploadStudents();

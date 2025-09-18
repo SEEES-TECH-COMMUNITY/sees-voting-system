@@ -13,6 +13,8 @@ export class StudentsService {
   ) {}
   async createStudent(payload: CreateDto) {
     const password = this.generateRandomPassword();
+    // wait 5 seconds before sending message
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     await this.whatsappService.sendMessage(
       payload.phone_number,
       payload.mat_number,
@@ -34,10 +36,11 @@ export class StudentsService {
           student,
         };
       } catch (error) {
-        console.log('Error creating student:', error);
+        console.log('Error creating student:', error, student);
         return {
           success: false,
           student,
+          error,
         };
       }
     });

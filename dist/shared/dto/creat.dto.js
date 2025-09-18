@@ -47,7 +47,11 @@ class CreateStudentBulkDto {
 }
 exports.CreateStudentBulkDto = CreateStudentBulkDto;
 __decorate([
-    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsArray)({ message: 'Students must be an array' }),
+    (0, class_validator_1.ArrayNotEmpty)({ message: 'At least one student is required' }),
+    (0, class_validator_1.ArrayMaxSize)(100, { message: 'Maximum 100 students can be uploaded at once' }),
+    (0, class_validator_1.ValidateNested)({ each: true }),
+    (0, class_transformer_1.Type)(() => CreateDto),
     __metadata("design:type", Array)
 ], CreateStudentBulkDto.prototype, "students", void 0);
 class CreateCandidateDto {

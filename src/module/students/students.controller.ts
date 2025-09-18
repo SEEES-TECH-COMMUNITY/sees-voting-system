@@ -13,6 +13,10 @@ export class StudentsController {
   // getStudents() {
   //   return this.service.getStudents();
   // }
+  @Post('bulk-create')
+  createBulkStudents(@Body() payload: CreateStudentBulkDto) {
+    return this.service.createBulkStudents(payload.students);
+  }
 
   @UseGuards(AuthGuard)
   @Get('me')

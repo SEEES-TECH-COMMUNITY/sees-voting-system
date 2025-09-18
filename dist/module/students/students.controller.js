@@ -21,6 +21,9 @@ let StudentsController = class StudentsController {
     constructor(service) {
         this.service = service;
     }
+    createBulkStudents(payload) {
+        return this.service.createBulkStudents(payload.students);
+    }
     findUser(req) {
         return req.user;
     }
@@ -29,6 +32,13 @@ let StudentsController = class StudentsController {
     }
 };
 exports.StudentsController = StudentsController;
+__decorate([
+    (0, common_1.Post)('bulk-create'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [creat_dto_1.CreateStudentBulkDto]),
+    __metadata("design:returntype", void 0)
+], StudentsController.prototype, "createBulkStudents", null);
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)('me'),

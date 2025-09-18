@@ -34,7 +34,11 @@ export class LoginDto {
   finger_print?: string;
 }
 export class CreateStudentBulkDto {
-  @IsArray()
+  @IsArray({ message: 'Students must be an array' })
+  @ArrayNotEmpty({ message: 'At least one student is required' })
+  @ArrayMaxSize(100, { message: 'Maximum 100 students can be uploaded at once' })
+  @ValidateNested({ each: true })
+  @Type(() => CreateDto)
   students: Array<CreateDto>;
 }
 

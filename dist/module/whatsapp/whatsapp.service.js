@@ -19,7 +19,7 @@ let WhatsappService = class WhatsappService {
         this.BASE_WHATSAPP_URL = env_1.ENV.WHATSAPP_API_URL;
     }
     async sendMessage(phone_number, mat_number, password) {
-        const text = `Welcome to SEES Voting System. Your login details are as follows:\nMatric Number: ${mat_number}\nPassword: ${password}\nPlease keep this information confidential and do not share it with anyone.\nThank you for being a part of our community!`;
+        const text = `Welcome to SEES Voting System. Your login details are as follows:\nMatric Number: ${mat_number}\nPassword: ${password}\nPlease keep this information confidential and do not share it with anyone.\n You can proceed to vote on https://voting.seees-uniben.org .\nThank you for being a part of our community!`;
         const url = `${this.BASE_WHATSAPP_URL}/api/sendText`;
         const payload = {
             chatId: `${phone_number.replace('+', '')}@c.us`,

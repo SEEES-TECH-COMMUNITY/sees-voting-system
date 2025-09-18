@@ -44,7 +44,7 @@ let StudentsService = class StudentsService {
                 };
             }
             catch (error) {
-                console.log('Error creating student:', error);
+                console.log('Error creating student:', error, student);
                 return {
                     success: false,
                     student,
