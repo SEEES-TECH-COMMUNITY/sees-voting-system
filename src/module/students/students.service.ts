@@ -14,7 +14,7 @@ export class StudentsService {
   async createStudent(payload: CreateDto) {
     const password = this.generateRandomPassword();
     // wait 5 seconds before sending message
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 20000));
     await this.whatsappService.sendMessage(
       payload.phone_number,
       payload.mat_number,
