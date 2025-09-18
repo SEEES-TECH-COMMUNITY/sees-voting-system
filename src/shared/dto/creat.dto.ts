@@ -36,7 +36,9 @@ export class LoginDto {
 export class CreateStudentBulkDto {
   @IsArray({ message: 'Students must be an array' })
   @ArrayNotEmpty({ message: 'At least one student is required' })
-  @ArrayMaxSize(100, { message: 'Maximum 100 students can be uploaded at once' })
+  @ArrayMaxSize(1000, {
+    message: 'Maximum 100 students can be uploaded at once',
+  })
   @ValidateNested({ each: true })
   @Type(() => CreateDto)
   students: Array<CreateDto>;
