@@ -21,10 +21,10 @@ export class CandidateController {
   //   return await this.service.createCandidate(payload);
   // }
 
-   @Post('create/bulk')
-   async createCandidateBulk(@Body() payload: CreateCandidateBulkDto) {
-     return await this.service.createCandidateBulk(payload.candidates);
-  }
+  //  @Post('create/bulk')
+  //  async createCandidateBulk(@Body() payload: CreateCandidateBulkDto) {
+  //    return await this.service.createCandidateBulk(payload.candidates);
+  // }
 
   @Get('all')
   getCandidates() {
