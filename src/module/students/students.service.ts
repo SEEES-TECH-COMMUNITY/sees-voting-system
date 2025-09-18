@@ -27,23 +27,25 @@ export class StudentsService {
     });
     return student;
   }
-  createBulkStudents(students: Array<CreateDto>) {
-    return students.map(async (student) => {
+  async createBulkStudents(students: Array<CreateDto>) {
+    const result = [];
+    for (const student of students) {
       try {
         await this.createStudent(student);
-        return {
+        result.push({
           success: true,
           student,
-        };
+        });
       } catch (error) {
         console.log('Error creating student:', error, student);
-        return {
+        result.push({
           success: false,
           student,
           error,
-        };
+        });
       }
-    });
+    }
+    return result;
   }
   getStudents() {
     return this.studentModel.find();
