@@ -11,8 +11,12 @@ export class WhatsappService {
     mat_number: string,
     password: string,
   ) {
+    await this.startTyping(phone_number);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     const text = `Welcome to SEES Voting System. Your login details are as follows:\nMatric Number: ${mat_number}\nPassword: ${password}\nPlease keep this information confidential and do not share it with anyone.\n You can proceed to vote on https://voting.seees-uniben.org .\nThank you for being a part of our community!`;
     const url = `${this.BASE_WHATSAPP_URL}/api/sendText`;
+    await this.stopTyping(phone_number);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const payload = {
       chatId: `${phone_number.replace('+', '')}@c.us`,
       text,
@@ -26,6 +30,39 @@ export class WhatsappService {
     });
     if (!success) {
       throw new BadRequestException('Failed to send message via WhatsApp');
+    }
+    return success;
+  }
+  async startTyping(phone_number: string) {
+    const url = `${this.BASE_WHATSAPP_URL}/api/startTyping`;
+    const payload = {
+      chatId: `${phone_number.replace('+', '')}@c.us`,
+      session: 'default',
+    };
+
+    const { success } = await this.httpService.request<any>({
+      url,
+      method: 'post',
+      data: payload,
+    });
+    if (!success) {
+      throw new BadRequestException('Failed to start typing via WhatsApp');
+    }
+    return success;
+  }
+  async stopTyping(phone_number: string) {
+    const url = `${this.BASE_WHATSAPP_URL}/api/stopTyping`;
+    const payload = {
+      chatId: `${phone_number.replace('+', '')}@c.us`,
+      session: 'default',
+    };
+    const { success } = await this.httpService.request<any>({
+      url,
+      method: 'post',
+      data: payload,
+    });
+    if (!success) {
+      throw new BadRequestException('Failed to stop typing via WhatsApp');
     }
     return success;
   }
