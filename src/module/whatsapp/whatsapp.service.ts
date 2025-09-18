@@ -13,7 +13,7 @@ export class WhatsappService {
   ) {
     await this.startTyping(phone_number);
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const text = `Welcome to SEES Voting System. Your login details are as follows:\nMatric Number: ${mat_number}\nPassword: ${password}\nPlease keep this information confidential and do not share it with anyone.\n You can proceed to vote on https://voting.seees-uniben.org .\nThank you for being a part of our community!`;
+    const text = `Welcome to the SEES Voting System. \nYour login details will be sent to this number at the start of the election tomorrow. \nThank you for being part of our community!`;
     const url = `${this.BASE_WHATSAPP_URL}/api/sendText`;
     await this.stopTyping(phone_number);
     await new Promise((resolve) => setTimeout(resolve, 1000));
