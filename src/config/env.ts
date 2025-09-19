@@ -8,6 +8,9 @@ export const envSchema = z.object({
   WHATSAPP_API_URL: z.string().min(1),
   SECRET_KEY: z.string().min(1),
   SERVER_KEY: z.string().min(1),
+  REDIS_HOST: z.string().min(1),
+  REDIS_USERNAME: z.string().min(1),
+  REDIS_PASSWORD: z.string().min(1),
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
