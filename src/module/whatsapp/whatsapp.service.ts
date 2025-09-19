@@ -100,14 +100,19 @@ export class WhatsappService {
     }
     const student = await this.studentModel
       .findOne({ phone_number: from.replace('@c.us', '') })
+      .select('+password')
       .exec();
     if (!student) {
+      console.log('Phone number not registered:', from);
+      return;
       return this.messagePhone(
         from.replace('@c.us', ''),
         'Your phone number is not registered. Please contact the administrator.',
       );
     }
     if (student.password) {
+      console.log('Account already active for:', from);
+      return;
       return this.messagePhone(
         from.replace('@c.us', ''),
         'Your account is already active. Please log in with the link already sent to participate in the election.',
