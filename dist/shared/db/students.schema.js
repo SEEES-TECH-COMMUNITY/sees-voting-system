@@ -15,7 +15,7 @@ let Student = class Student {
 };
 exports.Student = Student;
 __decorate([
-    (0, mongoose_1.Prop)({ select: false }),
+    (0, mongoose_1.Prop)({ select: false, required: false }),
     __metadata("design:type", String)
 ], Student.prototype, "password", void 0);
 __decorate([
@@ -24,6 +24,12 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Student.prototype, "mat_number", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], Student.prototype, "phone_number", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
     __metadata("design:type", String)

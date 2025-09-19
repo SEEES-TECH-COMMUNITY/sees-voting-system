@@ -19,6 +19,7 @@ const env_1 = require("../../config/env");
 const creat_dto_1 = require("../../shared/dto/creat.dto");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
+const cookies_1 = require("../../shared/constants/cookies");
 let AuthController = class AuthController {
     constructor(authService, jwtService, configService) {
         this.authService = authService;
@@ -61,6 +62,42 @@ let AuthController = class AuthController {
             });
         }
     }
+    async hashLogin(body, res) {
+        const student = await this.authService.loginUserByHash(body);
+        console.log(student);
+        if (student) {
+            const config = env_1.ENV.NODE_ENV === 'production'
+                ? {
+                    maxAge: 3600000,
+                    httpOnly: true,
+                    path: '/',
+                    secure: true,
+                    sameSite: 'lax',
+                    domain: 'seees-uniben.org',
+                }
+                : {
+                    httpOnly: true,
+                    path: '/',
+                    secure: false,
+                    sameSite: 'lax',
+                    maxAge: 3600000,
+                };
+            const token = this.jwtService.sign({ identifier: student._id, fingerprint: body.finger_print }, {
+                secret: this.configService.get('JWT_SECRET'),
+                expiresIn: '2h',
+            });
+            res.cookie(cookies_1.COOKIE_KEY, token, config).status(200).json({
+                success: true,
+                student,
+            });
+        }
+        else {
+            res.status(401).json({
+                success: false,
+                message: 'You are not authorized to login on this platform.',
+            });
+        }
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -71,6 +108,14 @@ __decorate([
     __metadata("design:paramtypes", [creat_dto_1.LoginDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "googleAuthCallback", null);
+__decorate([
+    (0, common_1.Post)('hash-login'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Res)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [creat_dto_1.loginUserByHashDto, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "hashLogin", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService,

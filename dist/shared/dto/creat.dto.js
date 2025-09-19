@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCandidateBulkDto = exports.CreateCandidateDto = exports.CreateStudentBulkDto = exports.LoginDto = exports.CreateDto = void 0;
+exports.CreateCandidateBulkDto = exports.CreateCandidateDto = exports.CreateStudentBulkDto = exports.loginUserByHashDto = exports.LoginDto = exports.CreateDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
 const positions_1 = require("../constants/positions");
@@ -43,13 +43,26 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], LoginDto.prototype, "finger_print", void 0);
+class loginUserByHashDto {
+}
+exports.loginUserByHashDto = loginUserByHashDto;
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], loginUserByHashDto.prototype, "hash", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], loginUserByHashDto.prototype, "finger_print", void 0);
 class CreateStudentBulkDto {
 }
 exports.CreateStudentBulkDto = CreateStudentBulkDto;
 __decorate([
     (0, class_validator_1.IsArray)({ message: 'Students must be an array' }),
     (0, class_validator_1.ArrayNotEmpty)({ message: 'At least one student is required' }),
-    (0, class_validator_1.ArrayMaxSize)(100, { message: 'Maximum 100 students can be uploaded at once' }),
+    (0, class_validator_1.ArrayMaxSize)(1000, {
+        message: 'Maximum 100 students can be uploaded at once',
+    }),
     (0, class_validator_1.ValidateNested)({ each: true }),
     (0, class_transformer_1.Type)(() => CreateDto),
     __metadata("design:type", Array)

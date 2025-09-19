@@ -4,10 +4,21 @@ import { Request } from 'express';
 export declare class StudentsController {
     private service;
     constructor(service: StudentsService);
-    createBulkStudents(payload: CreateStudentBulkDto): Promise<{
-        success: boolean;
-        student: CreateDto;
-    }>[];
+    createBulkStudents(payload: CreateStudentBulkDto): Promise<import("mongoose").MergeType<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("../../shared/db/students.schema").Student> & import("../../shared/db/students.schema").Student & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, import("../../shared/db/students.schema").Student> & import("../../shared/db/students.schema").Student & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>, Omit<{
+        phone_number: string;
+        mat_number: string;
+        level: string;
+    }, "_id">>[]>;
     findUser(req: Request): import("../../shared/db/students.schema").Student;
     createStudent(payload: CreateDto): Promise<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, import("../../shared/db/students.schema").Student> & import("../../shared/db/students.schema").Student & {
         _id: import("mongoose").Types.ObjectId;

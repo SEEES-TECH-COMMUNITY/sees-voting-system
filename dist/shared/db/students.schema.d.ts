@@ -4,6 +4,7 @@ export declare class Student {
     id: string;
     password: string;
     mat_number: string;
+    phone_number: string;
     level: string;
 }
 export declare const StudentSchema: import("mongoose").Schema<Student, import("mongoose").Model<Student, any, any, any, import("mongoose").Document<unknown, any, Student> & Student & {

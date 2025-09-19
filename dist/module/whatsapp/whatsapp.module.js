@@ -12,18 +12,22 @@ const whatsapp_controller_1 = require("./whatsapp.controller");
 const whatsapp_service_1 = require("./whatsapp.service");
 const axios_1 = require("@nestjs/axios");
 const http_service_1 = require("../../shared/services/http.service");
+const students_schema_1 = require("../../shared/db/students.schema");
+const mongoose_1 = require("@nestjs/mongoose");
+const crypto_service_1 = require("../../shared/services/crypto.service");
 let WhatsappModule = class WhatsappModule {
 };
 exports.WhatsappModule = WhatsappModule;
 exports.WhatsappModule = WhatsappModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            mongoose_1.MongooseModule.forFeature([{ name: students_schema_1.Student.name, schema: students_schema_1.StudentSchema }]),
             axios_1.HttpModule.register({
                 timeout: 200000,
                 maxRedirects: 5,
             }),
         ],
-        providers: [whatsapp_service_1.WhatsappService, http_service_1.HttpService],
+        providers: [whatsapp_service_1.WhatsappService, http_service_1.HttpService, crypto_service_1.CryptoService],
         controllers: [whatsapp_controller_1.WhatsappController],
         exports: [whatsapp_service_1.WhatsappService],
     })

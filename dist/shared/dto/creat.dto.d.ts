@@ -7,7 +7,11 @@ export declare class CreateDto {
 export declare class LoginDto {
     mat_number: string;
     password: string;
-    finger_print?: string;
+    finger_print: string;
+}
+export declare class loginUserByHashDto {
+    hash: string;
+    finger_print: string;
 }
 export declare class CreateStudentBulkDto {
     students: Array<CreateDto>;

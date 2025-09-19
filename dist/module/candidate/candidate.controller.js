@@ -15,13 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CandidateController = void 0;
 const common_1 = require("@nestjs/common");
 const candidate_service_1 = require("./candidate.service");
-const creat_dto_1 = require("../../shared/dto/creat.dto");
 let CandidateController = class CandidateController {
     constructor(service) {
         this.service = service;
-    }
-    async createCandidateBulk(payload) {
-        return await this.service.createCandidateBulk(payload.candidates);
     }
     getCandidates() {
         return this.service.getAllCandidates();
@@ -31,13 +27,6 @@ let CandidateController = class CandidateController {
     }
 };
 exports.CandidateController = CandidateController;
-__decorate([
-    (0, common_1.Post)('create/bulk'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [creat_dto_1.CreateCandidateBulkDto]),
-    __metadata("design:returntype", Promise)
-], CandidateController.prototype, "createCandidateBulk", null);
 __decorate([
     (0, common_1.Get)('all'),
     __metadata("design:type", Function),

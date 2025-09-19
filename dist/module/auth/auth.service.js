@@ -19,10 +19,12 @@ const mongoose_2 = require("mongoose");
 const fingerprint_schema_1 = require("../../shared/db/fingerprint.schema");
 const students_schema_1 = require("../../shared/db/students.schema");
 const argon2 = require("argon2");
+const crypto_service_1 = require("../../shared/services/crypto.service");
 let AuthService = class AuthService {
-    constructor(studentModel, fingerPrintModel) {
+    constructor(studentModel, fingerPrintModel, cryptoService) {
         this.studentModel = studentModel;
         this.fingerPrintModel = fingerPrintModel;
+        this.cryptoService = cryptoService;
     }
     async loginUser(body) {
         console.log(body);
@@ -72,6 +74,44 @@ let AuthService = class AuthService {
         }
         return student;
     }
+    async loginUserByHash(payload) {
+        const { finger_print, hash } = payload;
+        const decrypted = await this.cryptoService.decryptHash(hash);
+        if (!decrypted) {
+            return false;
+        }
+        const { mat_number, password } = decrypted;
+        const student = await this.studentModel
+            .findOne({ mat_number })
+            .select('+password');
+        if (!student) {
+            return null;
+        }
+        if (!(await argon2.verify(student.password, password))) {
+            console.log('wrong password');
+            return false;
+        }
+        if (!finger_print) {
+            return false;
+        }
+        const finger = await this.fingerPrintModel.findOne({
+            finger_print,
+        });
+        console.log(finger);
+        if (finger) {
+            if (finger.student_id.toString() !== student._id.toString()) {
+                return false;
+            }
+        }
+        else {
+            const newFinger = new this.fingerPrintModel({
+                student_id: student._id,
+                finger_print: finger_print,
+            });
+            await newFinger.save();
+        }
+        return student;
+    }
 };
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
@@ -79,6 +119,7 @@ exports.AuthService = AuthService = __decorate([
     __param(0, (0, mongoose_1.InjectModel)(students_schema_1.Student.name)),
     __param(1, (0, mongoose_1.InjectModel)(fingerprint_schema_1.FingerPrint.name)),
     __metadata("design:paramtypes", [mongoose_2.Model,
-        mongoose_2.Model])
+        mongoose_2.Model,
+        crypto_service_1.CryptoService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

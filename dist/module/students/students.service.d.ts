@@ -17,10 +17,21 @@ export declare class StudentsService {
     } & Required<{
         _id: import("mongoose").Types.ObjectId;
     }>>;
-    createBulkStudents(students: Array<CreateDto>): Promise<{
-        success: boolean;
-        student: CreateDto;
-    }>[];
+    createBulkStudents(students: Array<CreateDto>): Promise<import("mongoose").MergeType<import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Student> & Student & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    }> & import("mongoose").Document<unknown, {}, Student> & Student & {
+        _id: import("mongoose").Types.ObjectId;
+    } & {
+        __v?: number;
+    } & Required<{
+        _id: import("mongoose").Types.ObjectId;
+    }>, Omit<{
+        phone_number: string;
+        mat_number: string;
+        level: string;
+    }, "_id">>[]>;
     getStudents(): import("mongoose").Query<(import("mongoose").Document<unknown, {}, import("mongoose").Document<unknown, {}, Student> & Student & {
         _id: import("mongoose").Types.ObjectId;
     } & {

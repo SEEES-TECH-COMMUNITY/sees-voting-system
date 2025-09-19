@@ -9,6 +9,8 @@ exports.envSchema = zod_1.default.object({
     JWT_SECRET: zod_1.default.string().min(1),
     DASHBOARD_URL: zod_1.default.string().min(1),
     WHATSAPP_API_URL: zod_1.default.string().min(1),
+    SECRET_KEY: zod_1.default.string().min(1),
+    SERVER_KEY: zod_1.default.string().min(1),
     NODE_ENV: zod_1.default
         .enum(['development', 'test', 'production'])
         .default('development'),

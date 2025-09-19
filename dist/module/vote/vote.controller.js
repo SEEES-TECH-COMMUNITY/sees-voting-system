@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.VoteController = void 0;
 const common_1 = require("@nestjs/common");
 const vote_service_1 = require("./vote.service");
-const auth_guard_1 = require("../auth/guards/auth.guard");
+const auth_guard_1 = require("../../shared/guards/auth.guard");
 const user_decorator_1 = require("../../shared/decorators/user.decorator");
 let VoteController = class VoteController {
     constructor(service) {

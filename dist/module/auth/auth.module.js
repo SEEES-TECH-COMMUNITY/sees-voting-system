@@ -16,6 +16,7 @@ const jwt_1 = require("@nestjs/jwt");
 const env_1 = require("../../config/env");
 const fingerprint_schema_1 = require("../../shared/db/fingerprint.schema");
 const auth_strategy_1 = require("../../shared/strategy/auth.strategy");
+const crypto_service_1 = require("../../shared/services/crypto.service");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -32,7 +33,7 @@ exports.AuthModule = AuthModule = __decorate([
             }),
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, auth_strategy_1.AuthTokenStrategy],
+        providers: [auth_service_1.AuthService, auth_strategy_1.AuthTokenStrategy, crypto_service_1.CryptoService],
         exports: [auth_service_1.AuthService],
     })
 ], AuthModule);

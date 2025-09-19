@@ -16,7 +16,7 @@ exports.StudentsController = void 0;
 const common_1 = require("@nestjs/common");
 const students_service_1 = require("./students.service");
 const creat_dto_1 = require("../../shared/dto/creat.dto");
-const auth_guard_1 = require("../auth/guards/auth.guard");
+const auth_guard_1 = require("../../shared/guards/auth.guard");
 let StudentsController = class StudentsController {
     constructor(service) {
         this.service = service;

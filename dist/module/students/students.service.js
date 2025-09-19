@@ -34,23 +34,11 @@ let StudentsService = class StudentsService {
         });
         return student;
     }
-    createBulkStudents(students) {
-        return students.map(async (student) => {
-            try {
-                await this.createStudent(student);
-                return {
-                    success: true,
-                    student,
-                };
-            }
-            catch (error) {
-                console.log('Error creating student:', error, student);
-                return {
-                    success: false,
-                    student,
-                };
-            }
-        });
+    async createBulkStudents(students) {
+        return this.studentModel.insertMany(students.map((student) => ({
+            ...student,
+            phone_number: student.phone_number.replace('+', ''),
+        })));
     }
     getStudents() {
         return this.studentModel.find();
