@@ -13,9 +13,6 @@ export class StudentsService {
   ) {}
   async createStudent(payload: CreateDto) {
     const password = this.generateRandomPassword();
-    // wait 5 seconds before sending message
-    const randomWait = Math.floor(Math.random() * 5000) + 5000; // Random wait between 5 to 10 seconds
-    await new Promise((resolve) => setTimeout(resolve, 20000 + randomWait));
     await this.whatsappService.sendMessage(
       payload.phone_number,
       payload.mat_number,
@@ -29,24 +26,12 @@ export class StudentsService {
     return student;
   }
   async createBulkStudents(students: Array<CreateDto>) {
-    const result = [];
-    for (const student of students) {
-      try {
-        await this.createStudent(student);
-        result.push({
-          success: true,
-          student,
-        });
-      } catch (error) {
-        console.log('Error creating student:', error, student);
-        result.push({
-          success: false,
-          student,
-          error,
-        });
-      }
-    }
-    return result;
+    return this.studentModel.insertMany(
+      students.map((student) => ({
+        ...student,
+        phone_number: student.phone_number.replace('+', ''),
+      })),
+    );
   }
   getStudents() {
     return this.studentModel.find();

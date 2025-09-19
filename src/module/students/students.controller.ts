@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 
 import { StudentsService } from './students.service';
 import { CreateDto, CreateStudentBulkDto } from 'src/shared/dto/creat.dto';
-import { AuthGuard } from 'src/module/auth/guards/auth.guard';
+import { AuthGuard } from 'src/shared/guards/auth.guard';
 import { Request } from 'express';
 
 @Controller('students')
