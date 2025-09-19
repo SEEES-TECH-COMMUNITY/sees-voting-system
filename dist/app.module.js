@@ -43,10 +43,10 @@ exports.AppModule = AppModule = __decorate([
             students_module_1.StudentsModule,
             bullmq_1.BullModule.forRoot({
                 connection: {
-                    host: 'yamanote.proxy.rlwy.net',
+                    host: env_1.ENV.REDIS_HOST,
                     port: 14947,
-                    username: 'default',
-                    password: 'CXimaAeSdPeJTtdoDwDKuwUOLojxMXeT',
+                    username: env_1.ENV.REDIS_USERNAME,
+                    password: env_1.ENV.REDIS_PASSWORD,
                 },
             }),
         ],

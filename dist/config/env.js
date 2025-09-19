@@ -11,6 +11,9 @@ exports.envSchema = zod_1.default.object({
     WHATSAPP_API_URL: zod_1.default.string().min(1),
     SECRET_KEY: zod_1.default.string().min(1),
     SERVER_KEY: zod_1.default.string().min(1),
+    REDIS_HOST: zod_1.default.string().min(1),
+    REDIS_USERNAME: zod_1.default.string().min(1),
+    REDIS_PASSWORD: zod_1.default.string().min(1),
     NODE_ENV: zod_1.default
         .enum(['development', 'test', 'production'])
         .default('development'),
