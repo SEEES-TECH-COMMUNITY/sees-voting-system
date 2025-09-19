@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WhatsappController = void 0;
 const common_1 = require("@nestjs/common");
 const whatsapp_service_1 = require("./whatsapp.service");
+const x_header_guard_1 = require("../../shared/guards/x-header.guard");
 const bullmq_1 = require("bullmq");
 const bullmq_2 = require("@nestjs/bullmq");
 let WhatsappController = class WhatsappController {
@@ -30,6 +31,7 @@ let WhatsappController = class WhatsappController {
 exports.WhatsappController = WhatsappController;
 __decorate([
     (0, common_1.Post)('webhook'),
+    (0, common_1.UseGuards)(x_header_guard_1.HeaderGuard),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
