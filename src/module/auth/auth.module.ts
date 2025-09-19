@@ -10,6 +10,7 @@ import {
   FingerPrintSchema,
 } from 'src/shared/db/fingerprint.schema';
 import { AuthTokenStrategy } from 'src/shared/strategy/auth.strategy';
+import { CryptoService } from 'src/shared/services/crypto.service';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { AuthTokenStrategy } from 'src/shared/strategy/auth.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, AuthTokenStrategy],
+  providers: [AuthService, AuthTokenStrategy, CryptoService],
   exports: [AuthService],
 })
 export class AuthModule {}
