@@ -31,7 +31,15 @@ export class LoginDto {
   password: string;
 
   @IsString()
-  finger_print?: string;
+  finger_print: string;
+}
+
+export class loginUserByHashDto {
+  @IsString()
+  hash: string;
+  
+  @IsString()
+  finger_print: string;
 }
 export class CreateStudentBulkDto {
   @IsArray({ message: 'Students must be an array' })
