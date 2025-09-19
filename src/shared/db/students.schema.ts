@@ -7,13 +7,18 @@ export type StudentDocument = HydratedDocument<Student>;
 export class Student {
   id: string;
 
-  @Prop({ select: false })
+  @Prop({ select: false, required: false })
   password: string;
 
   @Prop({
     unique: true,
   })
   mat_number: string;
+
+  @Prop({
+    unique: true,
+  })
+  phone_number: string;
 
   @Prop()
   level: string;
