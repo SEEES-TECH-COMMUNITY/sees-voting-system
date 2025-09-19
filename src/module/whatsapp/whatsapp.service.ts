@@ -21,8 +21,7 @@ export class WhatsappService {
     mat_number: string,
     password: string,
   ) {
-    const firstDelay = Math.random() * (30000 - 5000) + 5000; // Random delay between 5 to 10 seconds
-    const secondsDelay = Math.random() * (30000 - 5000) + 5000; // Random delay between 5 to 10 seconds
+    const firstDelay = Math.random() * 5000; // Random delay between 5 to 10 seconds
     await this.startTyping(phone_number);
     await new Promise((resolve) => setTimeout(resolve, firstDelay));
     const sessionHash = {
@@ -96,8 +95,6 @@ export class WhatsappService {
   }
   async handleWhatsappWebhook(payload: IWebhook) {
     const { from, body } = payload.payload;
-    await new Promise((resolve) => setTimeout(resolve, Math.random() * 5000));
-    // await this.sendSeen(id, from);
     if (body.toUpperCase().trim() !== 'VOTE') {
       return 'OK';
     }

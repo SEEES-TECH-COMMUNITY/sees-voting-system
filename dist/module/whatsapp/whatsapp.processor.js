@@ -19,7 +19,6 @@ let WhatsappProcessor = class WhatsappProcessor extends bullmq_1.WorkerHost {
     }
     async process(job) {
         console.log('Processing job:', job.id, job.data);
-        console.log(Date.now());
         await new Promise((resolve) => setTimeout(resolve, 5000));
         await this.service.handleWhatsappWebhook(job.data);
         await job.updateProgress(100);

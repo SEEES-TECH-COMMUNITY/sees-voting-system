@@ -29,8 +29,7 @@ let WhatsappService = class WhatsappService {
         this.BASE_WHATSAPP_URL = env_1.ENV.WHATSAPP_API_URL;
     }
     async sendMessage(phone_number, mat_number, password) {
-        const firstDelay = Math.random() * (30000 - 5000) + 5000;
-        const secondsDelay = Math.random() * (30000 - 5000) + 5000;
+        const firstDelay = Math.random() * 5000;
         await this.startTyping(phone_number);
         await new Promise((resolve) => setTimeout(resolve, firstDelay));
         const sessionHash = {
@@ -99,7 +98,6 @@ let WhatsappService = class WhatsappService {
     }
     async handleWhatsappWebhook(payload) {
         const { from, body } = payload.payload;
-        await new Promise((resolve) => setTimeout(resolve, Math.random() * 5000));
         if (body.toUpperCase().trim() !== 'VOTE') {
             return 'OK';
         }
