@@ -142,3 +142,16 @@ async function uploadCandidates() {
 
 // Run the upload
 uploadCandidates();
+
+[
+  {
+    mat_number: 'ENG2309749',
+    level: '200',
+    phone_number: '+234818852632',
+  },
+  {
+    mat_number: 'ENG2303888',
+    level: '200',
+    phone_number: '+234819955513',
+  },
+];

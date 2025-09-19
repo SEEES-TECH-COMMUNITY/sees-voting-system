@@ -52,11 +52,19 @@ let AuthService = class AuthService {
             }
         }
         else {
-            const newFinger = new this.fingerPrintModel({
+            const studentFinger = await this.fingerPrintModel.findOne({
                 student_id: student._id,
-                finger_print: body.finger_print,
             });
-            await newFinger.save();
+            if (studentFinger && studentFinger.finger_print !== body.finger_print) {
+                return false;
+            }
+            if (!studentFinger) {
+                const newFinger = new this.fingerPrintModel({
+                    student_id: student._id,
+                    finger_print: body.finger_print,
+                });
+                await newFinger.save();
+            }
         }
         return student;
     }
@@ -97,18 +105,25 @@ let AuthService = class AuthService {
         const finger = await this.fingerPrintModel.findOne({
             finger_print,
         });
-        console.log(finger);
         if (finger) {
             if (finger.student_id.toString() !== student._id.toString()) {
                 return false;
             }
         }
         else {
-            const newFinger = new this.fingerPrintModel({
+            const studentFinger = await this.fingerPrintModel.findOne({
                 student_id: student._id,
-                finger_print: finger_print,
             });
-            await newFinger.save();
+            if (studentFinger && studentFinger.finger_print !== finger_print) {
+                return false;
+            }
+            if (!studentFinger) {
+                const newFinger = new this.fingerPrintModel({
+                    student_id: student._id,
+                    finger_print: finger_print,
+                });
+                await newFinger.save();
+            }
         }
         return student;
     }
