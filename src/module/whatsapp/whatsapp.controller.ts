@@ -2,14 +2,19 @@ import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { WhatsappService } from './whatsapp.service';
 import { IWebhook } from 'src/shared/meta/IWebhook';
 import { HeaderGuard } from 'src/shared/guards/x-header.guard';
+import { Queue } from 'bullmq';
+import { InjectQueue } from '@nestjs/bullmq';
 
 @Controller('whatsapp')
 export class WhatsappController {
-  constructor(private service: WhatsappService) {}
+  constructor(
+    private service: WhatsappService,
+    @InjectQueue('whatsapp') private whatsappQueue: Queue,
+  ) {}
   @Post('webhook')
-  @UseGuards(HeaderGuard)
+  // @UseGuards(HeaderGuard)
   async webhook(@Body() payload: IWebhook) {
-    console.log('Webhook received:', JSON.stringify(payload, null, 2));
-    return this.service.handleWhatsappWebhook(payload);
+    await this.whatsappQueue.add('whatsapp', payload);
+    return 'OK';
   }
 }
