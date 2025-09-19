@@ -6,6 +6,8 @@ export const envSchema = z.object({
   JWT_SECRET: z.string().min(1),
   DASHBOARD_URL: z.string().min(1),
   WHATSAPP_API_URL: z.string().min(1),
+  SECRET_KEY: z.string().min(1),
+  SERVER_KEY: z.string().min(1),
   NODE_ENV: z
     .enum(['development', 'test', 'production'])
     .default('development'),
