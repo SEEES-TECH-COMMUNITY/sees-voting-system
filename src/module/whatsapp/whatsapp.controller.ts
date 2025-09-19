@@ -12,7 +12,7 @@ export class WhatsappController {
     @InjectQueue('whatsapp') private whatsappQueue: Queue,
   ) {}
   @Post('webhook')
-  // @UseGuards(HeaderGuard)
+  @UseGuards(HeaderGuard)
   async webhook(@Body() payload: IWebhook) {
     await this.whatsappQueue.add('whatsapp', payload);
     return 'OK';
