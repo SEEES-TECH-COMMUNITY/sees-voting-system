@@ -102,6 +102,11 @@ export class WhatsappService {
       .findOne({ phone_number: from.replace('@c.us', '') })
       .select('+password')
       .exec();
+    await this.messagePhone(
+      from.replace('@c.us', ''),
+      'Voting concluded. Thank you for your interest.',
+    );
+    return 'OK';
     if (!student) {
       console.log('Phone number not registered:', from);
       return;
