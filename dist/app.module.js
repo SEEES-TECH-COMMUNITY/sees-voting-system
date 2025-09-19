@@ -20,6 +20,7 @@ const configuration_1 = require("./config/configuration");
 const whatsapp_module_1 = require("./module/whatsapp/whatsapp.module");
 const throttler_1 = require("@nestjs/throttler");
 const core_1 = require("@nestjs/core");
+const bullmq_1 = require("@nestjs/bullmq");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -40,6 +41,14 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(env_1.ENV.DATABASE_URL, { dbName: 'voting-service' }),
             auth_module_1.AuthModule,
             students_module_1.StudentsModule,
+            bullmq_1.BullModule.forRoot({
+                connection: {
+                    host: 'yamanote.proxy.rlwy.net',
+                    port: 14947,
+                    username: 'default',
+                    password: 'CXimaAeSdPeJTtdoDwDKuwUOLojxMXeT',
+                },
+            }),
         ],
         providers: [
             {

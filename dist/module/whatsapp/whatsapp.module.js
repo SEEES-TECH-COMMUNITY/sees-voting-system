@@ -15,6 +15,8 @@ const http_service_1 = require("../../shared/services/http.service");
 const students_schema_1 = require("../../shared/db/students.schema");
 const mongoose_1 = require("@nestjs/mongoose");
 const crypto_service_1 = require("../../shared/services/crypto.service");
+const bullmq_1 = require("@nestjs/bullmq");
+const whatsapp_processor_1 = require("./whatsapp.processor");
 let WhatsappModule = class WhatsappModule {
 };
 exports.WhatsappModule = WhatsappModule;
@@ -26,8 +28,11 @@ exports.WhatsappModule = WhatsappModule = __decorate([
                 timeout: 200000,
                 maxRedirects: 5,
             }),
+            bullmq_1.BullModule.registerQueue({
+                name: 'whatsapp',
+            }),
         ],
-        providers: [whatsapp_service_1.WhatsappService, http_service_1.HttpService, crypto_service_1.CryptoService],
+        providers: [whatsapp_service_1.WhatsappService, http_service_1.HttpService, crypto_service_1.CryptoService, whatsapp_processor_1.WhatsappProcessor],
         controllers: [whatsapp_controller_1.WhatsappController],
         exports: [whatsapp_service_1.WhatsappService],
     })

@@ -15,20 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WhatsappController = void 0;
 const common_1 = require("@nestjs/common");
 const whatsapp_service_1 = require("./whatsapp.service");
-const x_header_guard_1 = require("../../shared/guards/x-header.guard");
+const bullmq_1 = require("bullmq");
+const bullmq_2 = require("@nestjs/bullmq");
 let WhatsappController = class WhatsappController {
-    constructor(service) {
+    constructor(service, whatsappQueue) {
         this.service = service;
+        this.whatsappQueue = whatsappQueue;
     }
     async webhook(payload) {
-        console.log('Webhook received:', JSON.stringify(payload, null, 2));
-        return this.service.handleWhatsappWebhook(payload);
+        await this.whatsappQueue.add('whatsapp', payload);
+        return 'OK';
     }
 };
 exports.WhatsappController = WhatsappController;
 __decorate([
     (0, common_1.Post)('webhook'),
-    (0, common_1.UseGuards)(x_header_guard_1.HeaderGuard),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -36,6 +37,8 @@ __decorate([
 ], WhatsappController.prototype, "webhook", null);
 exports.WhatsappController = WhatsappController = __decorate([
     (0, common_1.Controller)('whatsapp'),
-    __metadata("design:paramtypes", [whatsapp_service_1.WhatsappService])
+    __param(1, (0, bullmq_2.InjectQueue)('whatsapp')),
+    __metadata("design:paramtypes", [whatsapp_service_1.WhatsappService,
+        bullmq_1.Queue])
 ], WhatsappController);
 //# sourceMappingURL=whatsapp.controller.js.map
