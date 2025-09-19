@@ -1,5 +1,5 @@
 // Configuration
-const API_URL = 'http://localhost:3005/v1/students/bulk-create';
+const API_URL = 'http://localhost:3009/v1/students/bulk-create';
 
 // Student data - modify this array with your students
 const studentsData = [
